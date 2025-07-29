@@ -1,0 +1,54 @@
+﻿using ClinikData.ViewModels;
+using System.ComponentModel.DataAnnotations;
+
+namespace ClinikData.Models
+{
+    public class Patient
+    {
+
+        public int Id { get; set; }
+
+        public string  Gender {get ; set ;} 
+        public string FullName { get; set; }
+
+        public string NationalId { get; set; }
+
+        public string Email { get; set; }
+
+        [RegularExpression("05\\d{8}", ErrorMessage = "Phone number must be in format 05xxxxxxxx")]
+        public string PhoneNumber { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
+
+
+        public PatientVM ToPatientVM()
+        {
+            return new PatientVM
+            {
+                Id = Id,
+                FullName = FullName,
+                Gender = Gender,
+                DateOfBirth = DateOfBirth,
+                Email = Email,
+                NationalId = NationalId,
+                PhoneNumber = PhoneNumber
+            };
+        }
+
+        public PatientUpdateVM ToPatientUpdateVM()
+        {
+            return new PatientUpdateVM
+            {
+                Id = Id,
+                FullName = FullName,
+                Gender = Gender ,
+                DateOfBirth = DateOfBirth,
+                Email = Email,
+                NationalId = NationalId,
+                PhoneNumber = PhoneNumber
+            };
+        }
+
+        public List<Appointment> Appointments { get; set; } = new();
+    }
+}
