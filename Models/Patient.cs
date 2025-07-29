@@ -20,6 +20,7 @@ namespace ClinikData.Models
 
         public DateTime DateOfBirth { get; set; }
 
+        
 
         public PatientVM ToPatientVM()
         {
@@ -31,7 +32,9 @@ namespace ClinikData.Models
                 DateOfBirth = DateOfBirth,
                 Email = Email,
                 NationalId = NationalId,
-                PhoneNumber = PhoneNumber
+                PhoneNumber = PhoneNumber ,
+                Appointments = Appointments.Select(a => a.ToAppointmentVM()).ToList(),
+
             };
         }
 

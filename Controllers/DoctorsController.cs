@@ -1,16 +1,21 @@
 ﻿using ClinikData.Models;
+using ClinikData.Services;
 using ClinikData.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 namespace ClinikData.Controllers
 {
     public class DoctorsController : Controller
     {
         public ClinicContext context;
+        public AnotherService anotherService;
+        public DoctorService doctorService;
 
-
-        public DoctorsController(ClinicContext context)
+        public DoctorsController(ClinicContext context, AnotherService anotherService, DoctorService doctorService)
         {
             this.context = context;
+            this.anotherService = anotherService;
+            this.doctorService = doctorService;
         }
 
         public IActionResult Index()
@@ -23,14 +28,13 @@ namespace ClinikData.Controllers
         public IActionResult Details(int id)
         {
 
-            var doctors
-                = context.Doctors.FirstOrDefault(p => p.Id == id);
+            var doctors = context.Doctors
+
+                            .Include(p => p.Appointments)
+                            .ThenInclude(a => a.Doctor)
+                            .FirstOrDefault(p => p.Id == id);
             if (doctors == null)
-            {
                 return NotFound();
-            }
-            var vm = doctors.ToDoctorsVM();
-            return View(doctors);
         }
 
         public IActionResult Create()

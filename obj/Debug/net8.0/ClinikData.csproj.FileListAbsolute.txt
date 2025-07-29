@@ -169,3 +169,4 @@ C:\Users\hp\source\repos\TuwaiqProjectOne\ClinikData\bin\Debug\net8.0\runtimes\b
 C:\Users\hp\source\repos\TuwaiqProjectOne\ClinikData\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\hp\source\repos\TuwaiqProjectOne\ClinikData\obj\Debug\net8.0\ClinikData.csproj.AssemblyReference.cache
 C:\Users\hp\source\repos\TuwaiqProjectOne\ClinikData\obj\Debug\net8.0\ClinikData.csproj.Up2Date
+C:\Users\hp\source\repos\TuwaiqProjectOne\ClinikData\obj\Debug\net8.0\ClinikData.sourcelink.json

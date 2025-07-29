@@ -12,6 +12,10 @@ namespace ClinikData.Models
 
         public string NationalId { get; set; }
 
+        public string Gender { get; set; }
+        public string Specialization { get; set; }
+
+
         public string? Email { get; set; }
 
         [RegularExpression("05\\d{8}", ErrorMessage = "Phone number must be in format 05xxxxxxxx")]
@@ -29,7 +33,8 @@ namespace ClinikData.Models
                 DateOfBirth = DateOfBirth,
                 Email = Email,
                 NationalId = NationalId,
-                PhoneNumber = PhoneNumber
+                PhoneNumber = PhoneNumber,
+                Appointments = Appointments.Select(a => a.ToAppointmentVM()).ToList(),
             };
         }
 

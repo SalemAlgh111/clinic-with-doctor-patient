@@ -9,11 +9,10 @@ namespace ClinikData.Models
         public DateTime CreationDate { get; set; }
         public int PatientId { get; set; }
         public int DoctorId { get; set; }
-        public string Status { get; set; } = null!;
 
+        public string DoctorName { get; set; } = null!;
 
-        public Patient Patient { get; set; } = null!;
-        public Doctor Doctor { get; set; } = null!;
+        public string RawStatus { get; set; } = null!;
         public string Status =>
            RawStatus == Statuses.Scheduled.ToString() && AppointmentDate < DateTime.Now
            ? "No Show" : RawStatus;

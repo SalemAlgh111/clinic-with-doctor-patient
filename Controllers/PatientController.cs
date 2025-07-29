@@ -1,17 +1,21 @@
 ﻿using ClinikData.Models;
 using ClinikData.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-
+using ClinikData.Services;
 namespace ClinikData.Controllers
 {
     public class PatientController : Controller
     {
 
         public ClinicContext context;
-
-        public PatientController(ClinicContext context)
+        public PatientService patientService;
+        public AnotherService anotherService;
+        public PatientController(ClinicContext context , PatientService patientService , AnotherService anotherService)
         {
             this.context = context;
+            this.patientService = patientService;
+            this.anotherService = anotherService;
+
         }
 
         //public IActionResult Index()
@@ -39,7 +43,10 @@ namespace ClinikData.Controllers
         public IActionResult Details(int id)
         {
 
-            var patient = context.Patients.FirstOrDefault(p => p.Id == id);
+            var patient = context.Patients
+               .Include(p => p.Appointments)
+               .ThenInclude(a => a.Doctor)
+               .FirstOrDefault(p => p.Id == id);
             if (patient == null)
             {
                 return NotFound();
@@ -70,7 +77,7 @@ namespace ClinikData.Controllers
             context.Patients.Add(patient);
             return RedirectToAction(nameof(Index));
         }
-
+            
         public IActionResult Update(int id)
         {
             var patient = context.Patients.FirstOrDefault(p => p.Id == id);
